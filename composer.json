@@ -1,0 +1,16 @@
+{
+    "name": "adizbek/give-me-crud",
+    "description": "Flexible CRUD package",
+    "authors": [
+        {
+            "name": "adizbek",
+            "email": "adizbek1998@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Adizbek\\GiveMeCrud\\": "src/"
+        }
+    }
+}
