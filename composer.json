@@ -12,5 +12,14 @@
         "psr-4": {
             "Adizbek\\GiveMeCrud\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Adizbek\\GiveMeCrud\\ServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
     }
 }
