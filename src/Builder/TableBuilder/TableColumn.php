@@ -4,9 +4,9 @@
 namespace Adizbek\GiveMeCrud\Builder\TableBuilder;
 
 
-use App\Extensions\TableBuilder\DataRenderer\CallbackRenderer;
-use App\Extensions\TableBuilder\DataRenderer\DefaultRenderer;
-use App\Extensions\TableBuilder\DataRenderer\IRenderer;
+use Adizbek\GiveMeCrud\Builder\DataRenderer\CallbackRenderer;
+use Adizbek\GiveMeCrud\Builder\DataRenderer\DefaultRenderer;
+use Adizbek\GiveMeCrud\Builder\DataRenderer\IRenderer;
 
 class TableColumn
 {
