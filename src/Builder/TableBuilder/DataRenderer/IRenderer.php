@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Extensions\TableBuilder\DataRenderer;
+namespace Adizbek\GiveMeCrud\Builder\DataRenderer;
 
 
 interface IRenderer

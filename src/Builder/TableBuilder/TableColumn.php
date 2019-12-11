@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Extensions\TableBuilder;
+namespace Adizbek\GiveMeCrud\Builder\TableBuilder;
 
 
 use App\Extensions\TableBuilder\DataRenderer\CallbackRenderer;
