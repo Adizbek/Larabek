@@ -18,39 +18,37 @@ class TableColumn
      */
     protected $renderer;
 
-    public $options;
-
-    protected $template;
+    protected $label = null;
+    protected $template = null;
+    protected $width = null;
 
     /**
      * TableColumn constructor.
      * @param $name
-     * @param $options
      */
-    public function __construct($name, $options)
+    public function __construct($name)
     {
         $this->name = $name;
-        $this->options = $options;
-        $this->renderer = $this->getRenderer($options);
-        $this->template = isset($options['template']) ? $options['template'] : null;
     }
 
     public function getTitle()
     {
-        return trans($this->options['label'] ?? $this->name);
+        return trans($this->label ?? $this->name);
     }
 
     public function renderData($data)
     {
-        return $this->wrapTemplate($this->renderer->render($this->renderer, $this->name, $data));
+        return $this->wrapTemplate($this->getRenderer()->render($this->name, $data));
     }
 
-    protected function getRenderer($options): IRenderer
+    protected function getRenderer(): IRenderer
     {
-        $renderer = isset($options['renderer']) ? $options['renderer'] : null;
+        $renderer = $this->renderer;
 
         if (is_callable($renderer)) {
             return new CallbackRenderer($renderer);
+        } else if ($renderer instanceof IRenderer) {
+            return $renderer;
         }
 
         return new DefaultRenderer();
@@ -62,6 +60,60 @@ class TableColumn
             return $data;
         }
 
-        return view($this->template, ['data' => $data, 'options' => $this->options]);
+        return view($this->template, ['data' => $data]);
     }
+
+    /**
+     * @param IRenderer|callable $renderer
+     * @return TableColumn
+     */
+    public function setRenderer($renderer): TableColumn
+    {
+        $this->renderer = $renderer;
+
+        return $this;
+    }
+
+    /**
+     * @param string $label
+     * @return TableColumn
+     */
+    public function setLabel($label): TableColumn
+    {
+        $this->label = $label;
+        return $this;
+    }
+
+    /**
+     * @param string $template
+     * @return TableColumn
+     */
+    public function setTemplate($template): TableColumn
+    {
+        $this->template = $template;
+        return $this;
+    }
+
+    /**
+     * @param string $width
+     * @return TableColumn
+     */
+    public function setWidth($width): TableColumn
+    {
+        $this->width = $width;
+        return $this;
+    }
+
+    public function getAttributes()
+    {
+        $attrs = " ";
+
+        if ($this->width) {
+            $attrs .= "width=\"$this->width\"";
+        }
+
+        return $attrs;
+    }
+
+
 }

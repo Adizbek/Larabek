@@ -19,13 +19,12 @@ class CallbackRenderer implements IRenderer
     }
 
     /**
-     * @param $self CallbackRenderer
-     * @param $columnName
+¬     * @param $columnName
      * @param $data
      * @return mixed
      */
-    public static function render($self, $columnName, $data)
+    public function render($columnName, $data)
     {
-        return call_user_func($self->callback, $columnName, $data);
+        return call_user_func($this->callback, $columnName, $data);
     }
 }

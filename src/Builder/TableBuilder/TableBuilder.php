@@ -24,9 +24,16 @@ class TableBuilder
         $this->data = $data;
     }
 
-    public function addColumn($name, $options = [])
+    /**
+     * @param string $name Name of column
+     * @return TableColumn
+     */
+    public function addColumn($name)
     {
-        $this->columns[] = new TableColumn($name, $options);
+        $column = new TableColumn($name);
+        $this->columns[] = $column;
+
+        return $column;
     }
 
     public function render()
@@ -61,7 +68,7 @@ class TableBuilder
         foreach ($this->data as $data) {
             echo '<tr>';
             foreach ($this->columns as $column) {
-                echo "<td>{$column->renderData($data)}</td>";
+                echo "<td{$column->getAttributes()}>{$column->renderData($data)}</td>";
             }
             echo '</tr>';
         }
