@@ -19,3 +19,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 
+public/admin/*
