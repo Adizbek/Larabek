@@ -1,22 +1,6 @@
 <template>
     <b-navbar class="navbar" type="dark" variant="dark">
-        <b-navbar-brand :to="{name: 'home'}">NavBar</b-navbar-brand>
-
-        <b-navbar-nav>
-            <b-nav-item href="#">Home</b-nav-item>
-
-            <b-nav-item-dropdown text="Lang" right>
-                <b-dropdown-item href="#">EN</b-dropdown-item>
-                <b-dropdown-item href="#">ES</b-dropdown-item>
-                <b-dropdown-item href="#">RU</b-dropdown-item>
-                <b-dropdown-item href="#">FA</b-dropdown-item>
-            </b-nav-item-dropdown>
-
-            <b-nav-item-dropdown text="User" right>
-                <b-dropdown-item href="#">Account</b-dropdown-item>
-                <b-dropdown-item href="#">Settings</b-dropdown-item>
-            </b-nav-item-dropdown>
-        </b-navbar-nav>
+        <b-navbar-brand :to="{name: 'home'}">Larabek</b-navbar-brand>
     </b-navbar>
 </template>
 

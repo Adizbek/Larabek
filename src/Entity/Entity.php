@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Adizbek\GiveMeCrud;
+namespace Adizbek\Larabek;
 
 use App\Entities\UserEntity;
 use Illuminate\Database\Eloquent\Collection;

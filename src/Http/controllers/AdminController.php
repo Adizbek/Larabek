@@ -1,10 +1,10 @@
 <?php
 
-namespace Adizbek\GiveMeCrud\Controllers;
+namespace Adizbek\Larabek\Controllers;
 
 
-use Adizbek\GiveMeCrud\CRUD;
-use Adizbek\GiveMeCrud\Entity;
+use Adizbek\Larabek\Larabek;
+use Adizbek\Larabek\Entity;
 
 class AdminController
 {
@@ -15,7 +15,7 @@ class AdminController
 
     public function entities()
     {
-        $entities = CRUD::getEntities();
+        $entities = Larabek::getEntities();
 
         return response()->json($entities);
     }
@@ -25,7 +25,7 @@ class AdminController
         /**
          * @var $entity Entity
          */
-        $entity = CRUD::getEntity($slug);
+        $entity = Larabek::getEntity($slug);
 
         return response()->json([
             'items' => $entity->getList(),
