@@ -6,18 +6,18 @@ namespace Adizbek\Larabek;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SwitchField extends ListField
+class TextField extends Field
 {
 
     public function type(): string
     {
-        return 'switch';
+        return 'text';
     }
 
     public function transform(Model $model)
     {
         return [
-            'checked' => boolval($model[$this->name])
+            'text' => $model[$this->name]
         ];
     }
 }

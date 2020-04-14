@@ -7,6 +7,7 @@ Route::prefix(config('admin.route_prefix'))->group(function () {
 
     Route::post('/entities', [AdminController::class, 'entities']);
     Route::post('/list/{slug}', [AdminController::class, 'list']);
+    Route::post('/action/{slug}', [AdminController::class, 'action']);
 });
 
 ?>

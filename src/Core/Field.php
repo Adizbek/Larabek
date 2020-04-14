@@ -6,12 +6,12 @@ namespace Adizbek\Larabek;
 
 use Illuminate\Database\Eloquent\Model;
 
-abstract class ListField implements \JsonSerializable
+abstract class Field implements \JsonSerializable
 {
     protected $name;
 
     /**
-     * ListField constructor.
+     * Field constructor.
      * @param $name
      */
     public function __construct($name)
