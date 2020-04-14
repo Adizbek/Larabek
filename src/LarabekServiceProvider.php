@@ -18,7 +18,18 @@ class CRUDServiceProvider extends BaseServiceProvider
     public function boot()
     {
         $this->app->singleton('crud', function ($app) {
-           return new CRUDManager();
+            return new CRUDManager();
         });
+
+        $this->publish();
+    }
+
+    private function publish()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../public/admin' => public_path('vendor/crud')
+            ]);
+        }
     }
 }
