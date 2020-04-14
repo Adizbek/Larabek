@@ -1,6 +1,6 @@
 <?php
 
-use Adizbek\GiveMeCrud\Controllers\AdminController;
+use Adizbek\Larabek\Controllers\AdminController;
 
 Route::prefix(config('admin.route_prefix'))->group(function () {
     Route::get('/{path?}', [AdminController::class, 'index'])->where('path', '.+');

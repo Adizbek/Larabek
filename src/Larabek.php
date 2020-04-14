@@ -1,13 +1,13 @@
 <?php
 
-namespace Adizbek\GiveMeCrud;
+namespace Adizbek\Larabek;
 
 use Illuminate\Support\Facades\Facade;
 
-class CRUD extends Facade
+class Larabek extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'crud';
+        return 'larabek';
     }
 }

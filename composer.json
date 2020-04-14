@@ -1,22 +1,25 @@
 {
-    "name": "adizbek/give-me-crud",
-    "description": "Flexible CRUD package",
+    "name": "adizbek/larabek",
+    "description": "Larabek - New Admin package for Laravel",
     "authors": [
         {
             "name": "adizbek",
             "email": "adizbek1998@gmail.com"
         }
     ],
-    "require": {},
+    "homepage": "https://github.com/Adizbek/Larabek",
+    "require": {
+        "php": ">=7.2.0"
+    },
     "autoload": {
         "psr-4": {
-            "Adizbek\\GiveMeCrud\\": "src/"
+            "Adizbek\\Larabek\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Adizbek\\GiveMeCrud\\ServiceProvider"
+                "Adizbek\\Larabek\\LarabekServiceProvider"
             ],
             "aliases": {
             }

@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Adizbek\GiveMeCrud;
+namespace Adizbek\Larabek;
 
 
 use App\Post;
 use Illuminate\Support\Collection;
 
-class CRUDManager
+class LarabekManager
 {
     /**
      * @var Entity[]

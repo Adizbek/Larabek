@@ -1,24 +1,24 @@
 <?php
 
 
-namespace Adizbek\GiveMeCrud;
+namespace Adizbek\Larabek;
 
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class CRUDServiceProvider extends BaseServiceProvider
+class LarabekServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/admin.php', 'admin');
+        $this->mergeConfigFrom(__DIR__ . '/../config/larabek.php', 'admin');
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'admin');
     }
 
     public function boot()
     {
-        $this->app->singleton('crud', function ($app) {
-            return new CRUDManager();
+        $this->app->singleton('larabek', function ($app) {
+            return new LarabekManager();
         });
 
         $this->publish();
@@ -28,7 +28,7 @@ class CRUDServiceProvider extends BaseServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../public/admin' => public_path('vendor/crud')
+                __DIR__ . '/../public/larabek' => public_path('vendor/larabek')
             ]);
         }
     }

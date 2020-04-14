@@ -1,6 +1,6 @@
 <template>
     <div class="footer">
-        <div>Powered by Adizbek/GiveMeCrud</div>
+        <div>Powered by Adizbek/Larabek</div>
         <div>
             Github <a target="_blank" href="https://github.com/adizbek">@adizbek</a>
         </div>

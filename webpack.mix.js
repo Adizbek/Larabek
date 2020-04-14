@@ -11,5 +11,17 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/admin/js')
-    .sass('resources/scss/app.scss', 'public/admin/css');
+mix.options({
+    terser: {
+        terserOptions: {
+            compress: {
+                drop_console: true,
+            },
+        },
+    },
+})
+
+    .setPublicPath('public')
+    .js('./resources/js/app.js', 'public/larabek')
+    .sass('./resources/scss/app.scss', 'public/larabek')
+    .version();
