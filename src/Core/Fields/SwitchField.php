@@ -1,9 +1,9 @@
 <?php
 
 
-namespace Adizbek\Larabek;
+namespace Adizbek\Larabek\Core\Fields;
 
-
+use Adizbek\Larabek\Core\Field;
 use Illuminate\Database\Eloquent\Model;
 
 class SwitchField extends Field

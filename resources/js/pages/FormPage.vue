@@ -1,14 +1,12 @@
 <template>
-  <span>{{data.text}}</span>
+  <div>
+    <div>Form</div>
+  </div>
 </template>
 
 <script>
   export default {
-    name: "TextListField",
-
-    props: {
-      data: {}
-    }
+    name: "FormPage"
   }
 </script>
 

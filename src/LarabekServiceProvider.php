@@ -4,6 +4,7 @@
 namespace Adizbek\Larabek;
 
 
+use Adizbek\Larabek\Core\LarabekManager;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class LarabekServiceProvider extends BaseServiceProvider

@@ -21,7 +21,8 @@
                   </b-td>
 
                   <b-td>
-                    <Action :key="i" :entity="entity" :model="item.model" :action="action" v-for="(action, i) in list.actions"/>
+                    <Action :key="i" :entity="entity" :model="item.model" :action="action"
+                            v-for="(action, i) in list.actions"/>
                   </b-td>
                 </b-tr>
               </b-tbody>
@@ -55,7 +56,7 @@
 
     computed: {
       entity() {
-        return this.$route.params.slug
+        return this.$route.params.entity
       }
     }
   }

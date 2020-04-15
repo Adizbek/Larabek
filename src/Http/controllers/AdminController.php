@@ -4,7 +4,6 @@ namespace Adizbek\Larabek\Controllers;
 
 
 use Adizbek\Larabek\Larabek;
-use Adizbek\Larabek\Entity;
 use Illuminate\Http\Request;
 
 class AdminController
@@ -21,28 +20,18 @@ class AdminController
         return response()->json($entities);
     }
 
-    public function list($slug)
+    public function list($entity)
     {
-        /**
-         * @var $entity Entity
-         */
-        $entity = Larabek::getEntity($slug);
-
-        return response()->json($entity->getListMeta());
+        return response()->json(Larabek::getEntity($entity)->getListMeta());
     }
 
-    public function action(Request $request, $slug)
+    public function details($entity, $id)
     {
-        $action = $request->post('action');
-        $data = $request->post('data');
+        return response()->json(Larabek::getEntity($entity)->getDetailsMeta($id));
+    }
 
-        /**
-         * @var $entity Entity
-         */
-        $entity = Larabek::getEntity($slug);
-
-        $response = $entity->triggerAction($action);
-
-        return response()->json($response);
+    public function action($entity, $action)
+    {
+        return response()->json(Larabek::getEntity($entity)->triggerAction($action));
     }
 }

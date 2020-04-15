@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Adizbek\Larabek;
+namespace Adizbek\Larabek\Core;
 
 
-use App\Post;
+use Adizbek\Larabek\Core\Entity\Entity;
 use Illuminate\Support\Collection;
 
 class LarabekManager
@@ -21,7 +21,7 @@ class LarabekManager
          */
         $instance = new $class(request());
 
-        $this->entities[$instance->slug()] = $instance;
+        $this->entities[$instance->name()] = $instance;
     }
 
     /**
@@ -35,15 +35,15 @@ class LarabekManager
              */
 
             return [
-                'name' => $e->name(),
-                'slug' => $e->slug()
+                'displayName' => $e->displayName(),
+                'name' => $e->name()
             ];
         })->toArray();
     }
 
-    public function getEntity($slug)
+    public function getEntity($name)
     {
-        return $this->entities[$slug];
+        return $this->entities[$name];
     }
 
 

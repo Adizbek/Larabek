@@ -4,7 +4,7 @@
 namespace Adizbek\Larabek\Core;
 
 
-use Adizbek\Larabek\Entity;
+use Adizbek\Larabek\Core\Entity\Entity;
 use Illuminate\Database\Eloquent\Collection;
 use JsonSerializable;
 
