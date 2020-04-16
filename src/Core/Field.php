@@ -44,6 +44,19 @@ abstract class Field implements \JsonSerializable
         ];
     }
 
+    /**
+     * @param Model|null $model
+     * @return array
+     */
+    public function getFormData(?Model $model)
+    {
+        return [
+            'type' => $this->type(),
+            'name' => $this->getName(),
+            'data' => $model ? $this->transform($model) : null
+        ];
+    }
+
 
     public function jsonSerialize()
     {

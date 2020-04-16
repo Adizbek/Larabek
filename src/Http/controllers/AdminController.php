@@ -30,6 +30,11 @@ class AdminController
         return response()->json(Larabek::getEntity($entity)->getDetailsMeta($id));
     }
 
+    public function form($entity, $id)
+    {
+        return response()->json(Larabek::getEntity($entity)->getFormMeta($id));
+    }
+
     public function action($entity, $action)
     {
         return response()->json(Larabek::getEntity($entity)->triggerAction($action));

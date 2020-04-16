@@ -24,4 +24,7 @@ mix.options({
     .setPublicPath('public')
     .js('./resources/js/app.js', 'public/larabek')
     .sass('./resources/scss/app.scss', 'public/larabek')
+    .babelConfig({
+        plugins: ['@babel/plugin-proposal-class-properties'],
+    })
     .version();

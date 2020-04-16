@@ -4,11 +4,10 @@
       <b-col sm="12" class="mt-2">
         <div class="card">
           <div class="card-body">
-            <component :key="field.name"
-                       :field="field"
-                       :data="field.data"
-                       :is="field.type + '-details-field'"
-                       v-for="field in fields"/>
+            <details-field :key="field.name"
+                           :field="field"
+                           :data="field.data"
+                           v-for="field in fields"/>
           </div>
         </div>
       </b-col>

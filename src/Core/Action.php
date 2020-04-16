@@ -18,6 +18,7 @@ abstract class Action implements JsonSerializable
 
     private $showIcon = true;
     private $showText = true;
+    private $data = [];
 
     public function showOnlyText()
     {
@@ -43,6 +44,20 @@ abstract class Action implements JsonSerializable
         return $this;
     }
 
+    public function withData(string $key, $value)
+    {
+        $this->data[$key] = $value;
+
+        return $this;
+    }
+
+    public function clearData()
+    {
+        $this->data = [];
+
+        return $this;
+    }
+
     public abstract function handle(Entity $entity, $fields, Collection $models);
 
 
@@ -54,6 +69,7 @@ abstract class Action implements JsonSerializable
             'name' => $this->actionName(),
             'showText' => $this->showText,
             'showIcon' => $this->showIcon,
+            'data' => $this->data,
         ];
     }
 }

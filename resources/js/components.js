@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import kebabCase from 'lodash/kebabCase'
-import * as path from 'path'
+
+
+Vue.component('details-field', require('./components/fields/DetailsField'))
+Vue.component('form-field', require('./components/fields/FormField'))
 
 const requireComponent = require.context(
     './components/fields/',

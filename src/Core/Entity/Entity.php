@@ -10,8 +10,7 @@ use Illuminate\Support\Collection;
 
 abstract class Entity
 {
-
-    use EntitySheet, EntityDetails, EntityFilters, EntityActions;
+    use EntitySheet, EntityDetails, EntityForm, EntityFilters, EntityActions;
 
     private $request;
 

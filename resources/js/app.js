@@ -12,6 +12,7 @@ Vue.prototype.$http = axios;
 
 
 import './components'
+import './core/Larabek'
 
 window.vm = new Vue({
     // i18n,

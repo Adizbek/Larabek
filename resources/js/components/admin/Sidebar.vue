@@ -4,7 +4,7 @@
       <div class="menu">
         <div class="menu-header">Models</div>
 
-        <router-link tag="a" :to="{name: 'list', params: {slug: entity.name}}"
+        <router-link tag="a" :to="{name: 'list', params: {entity: entity.name}}"
                      :key="entity.name"
                      class="menu-item"
                      v-for="entity in entities">

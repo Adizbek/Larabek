@@ -1,10 +1,22 @@
 <template>
-  <div>Form</div>
+  <div>
+    <input :value="value" @input="onInput" class="form-control">
+  </div>
 </template>
 
 <script>
   export default {
-    name: "TextFormField"
+    name: "TextFormField",
+
+    props: {
+      value: {}
+    },
+
+    methods: {
+      onInput(data) {
+        this.$emit('input', data);
+      }
+    }
   }
 </script>
 

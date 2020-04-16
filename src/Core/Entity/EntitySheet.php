@@ -16,7 +16,7 @@ trait EntitySheet
         return $this->getModel()::query();
     }
 
-    public function getSheetFields(): Collection
+    public function getSheetFields(): \Illuminate\Support\Collection
     {
         return $this->getFieldsCollection()->filter(function (Field $field) {
             return $field->isOnSheet();
