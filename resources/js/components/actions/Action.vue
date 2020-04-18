@@ -1,5 +1,5 @@
 <template>
-  <div @click="trigger" class="d-inline-block btn btn-primary mr-1">{{action.text}}</div>
+  <div @click="trigger" class="d-inline-block btn btn-primary btn-sm" :class="{'mr-1': !last}">{{action.text}}</div>
 </template>
 
 <script>
@@ -9,9 +9,23 @@
   export default {
     name: "Action",
     props: {
-      action: {},
-      entity: String,
-      model: {}
+      action: {
+        type: Object,
+        required: true
+      },
+
+      entity: {
+        type: String,
+        required: true
+      },
+
+      model: {},
+
+      last: {
+        default: false,
+        required: false,
+        type: Boolean
+      }
     },
 
     methods: {

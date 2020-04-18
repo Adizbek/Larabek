@@ -2,6 +2,16 @@
   <b-container fluid>
     <b-row>
       <b-col sm="12" class="mt-2">
+        <div class="float-right">
+          <Action :model="model" :entity="entity" :action="action" :key="index" v-for="(action,index) in actions"/>
+        </div>
+
+        <div class="h4">
+          {{this.entity }} Details
+        </div>
+      </b-col>
+
+      <b-col sm="12" class="mt-2">
         <div class="card">
           <div class="card-body">
             <details-field :key="field.name"
@@ -16,9 +26,11 @@
 </template>
 
 <script>
+  import Action from "../components/actions/Action";
+
   export default {
     name: "DetailsPage",
-
+    components: {Action},
     data() {
       return {
         item: {}

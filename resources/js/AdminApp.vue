@@ -36,6 +36,6 @@
     background: #eee;
     display: flex;
     flex-direction: column;
-    min-height: calc(100% - 50px);
+    min-height: 100%;
   }
 </style>

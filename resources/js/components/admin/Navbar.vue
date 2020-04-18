@@ -1,5 +1,5 @@
 <template>
-  <b-navbar class="navbar" type="dark" variant="dark">
+  <b-navbar class="navbar" type="dark" variant="primary">
     <b-navbar-brand :to="{name: 'home'}">Larabek</b-navbar-brand>
   </b-navbar>
 </template>

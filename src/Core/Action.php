@@ -10,6 +10,8 @@ use JsonSerializable;
 
 abstract class Action implements JsonSerializable
 {
+    use Hideable;
+
     public abstract function actionName();
 
     public $icon = '';

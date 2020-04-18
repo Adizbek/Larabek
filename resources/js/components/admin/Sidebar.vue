@@ -7,6 +7,7 @@
         <router-link tag="a" :to="{name: 'list', params: {entity: entity.name}}"
                      :key="entity.name"
                      class="menu-item"
+                     active-class="menu-item-active"
                      v-for="entity in entities">
           {{entity.displayName}}
         </router-link>
@@ -39,8 +40,8 @@
   .menu-header {
     font-weight: bold;
     font-size: 17px;
-    padding: 12px 15px;
-    background: rgba(0, 0, 0, .15);
+    padding: 4px 15px;
+    /*background: rgba(0, 0, 0, .15);*/
   }
 
   .menu-item {
@@ -49,9 +50,10 @@
     font-size: 15px;
     display: flex;
     align-items: center;
+    text-decoration: none;
 
-    &:hover {
-      background: rgba(0, 0, 0, .1);
+    &:hover, &-active {
+      background: rgba(0, 0, 0, .04);
     }
   }
 </style>
