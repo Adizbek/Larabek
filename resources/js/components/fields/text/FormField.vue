@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input :value="value" @input="onInput" class="form-control">
+    <input v-model="localValue" class="form-control">
   </div>
 </template>
 
@@ -12,9 +12,17 @@
       value: {}
     },
 
-    methods: {
-      onInput(data) {
-        this.$emit('input', data);
+    data() {
+      return {
+        localValue: this.value
+      }
+    },
+
+    methods: {},
+
+    watch: {
+      localValue(val) {
+        this.$emit('input', val);
       }
     }
   }

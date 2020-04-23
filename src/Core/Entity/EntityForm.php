@@ -20,7 +20,7 @@ trait EntityForm
     {
         $model = $id ? $this->getModel()::find($id): null;
 
-        $fields = $this->getDetailsFields()->map(function (Field $field) use ($model) {
+        $fields = $this->getFormFields()->map(function (Field $field) use ($model) {
             return $field->getFormData($model);
         });
 

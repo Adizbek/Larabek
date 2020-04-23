@@ -5,6 +5,9 @@
         <div class="card my-2">
           <div class="card-body">
             <div class="h3 mb-2 text-capitalize">{{entity}}</div>
+            <div>
+              <b-btn @click="$router.push({name: 'form', params: {entity: entity}})">Add new</b-btn>
+            </div>
 
             <div class="table-responsive">
               <table class="table table-bordered table-sm">

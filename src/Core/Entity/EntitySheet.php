@@ -46,7 +46,7 @@ trait EntitySheet
     {
         return [
             'items' => $this->getList(),
-            'fields' => $this->getFields(),
+            'fields' => $this->getSheetFields(),
             'actions' => $this->getActions()
         ];
     }

@@ -7,7 +7,7 @@ import axios from 'axios';
 
 Vue.use(BootstrapVue);
 
-axios.defaults.baseURL = '/' + window.ADMIN_PREFIX;
+axios.defaults.baseURL = '/' + window.ADMIN_PREFIX + '/api';
 Vue.prototype.$http = axios;
 
 

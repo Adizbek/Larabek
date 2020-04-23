@@ -24,7 +24,7 @@ abstract class Entity
     }
 
     /**
-     * @return Model
+     * @return \Eloquent
      */
     public abstract function getModel();
 
@@ -49,5 +49,45 @@ abstract class Entity
     public function name()
     {
         return strtolower(class_basename($this->getModel()));
+    }
+
+    public function update($id, array $data)
+    {
+        $model = $this->getModel()::find($id);
+        $this->fill($model, $data);
+        $model->save();
+
+        return $model;
+    }
+
+    public function insert(array $data)
+    {
+        $cls = $this->getModel();
+        $model = new $cls;
+
+        $this->fill($model, $data);
+        $model->save();
+
+        return $model;
+    }
+
+    /**
+     * @param \Model $model
+     * @param $data
+     */
+    public function fill($model, $data)
+    {
+        $dataList = collect($data);
+        $request = request();
+
+        $this->getFormFields()->each(function (Field $field) use ($model, $dataList, $request) {
+            $fieldName = $field->getName();
+            $fieldData = $dataList->firstWhere('name', '=', $fieldName);
+
+            if (!$fieldName)
+                return;
+
+            $field->fillModel($model, $request, $fieldName, $fieldData);
+        });
     }
 }

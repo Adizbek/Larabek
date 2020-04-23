@@ -7,14 +7,14 @@
 
           <div class="card-body">
             <form-field :key="field.name"
-                           :field="field"
-                           :data="field.data"
-                           v-for="field in fields"/>
+                        :field="field"
+                        v-model="field.data"
+                        v-for="field in fields"/>
           </div>
 
           <div class="card-footer text-right">
             <b-btn variant="primary">Save & Add another</b-btn>
-            <b-btn variant="primary">Save</b-btn>
+            <b-btn variant="primary" @click="save">Save</b-btn>
           </div>
         </div>
       </b-col>
@@ -30,7 +30,7 @@
       return {
         item: {},
 
-        edit: false
+        edit: !!this.$route.params.id
       }
     },
 
@@ -40,9 +40,35 @@
 
     methods: {
       loadEntity() {
-        this.$http.post(`form/${this.entity}/${this.id}`).then(res => {
-          this.item = res.data
-        })
+        if (this.edit) {
+          this.$http.get(`form/${this.entity}/${this.id}`).then(res => {
+            this.item = res.data
+          })
+        } else {
+          this.$http.get(`form/${this.entity}`).then(res => {
+            this.item = res.data
+          })
+        }
+      },
+
+      save() {
+        if (this.edit) {
+
+          this.$http.post(`form/${this.entity}/${this.id}`, {
+            data: this.fields
+          }).then(res => {
+            this.item = res.data
+          })
+
+        } else {
+
+          this.$http.post(`form/${this.entity}`, {
+            data: this.fields
+          }).then(res => {
+            this.item = res.data
+          })
+
+        }
       }
     },
 
