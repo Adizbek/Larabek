@@ -11,6 +11,12 @@ class PaginationFilter extends SelectFilter
 {
     public $applyOnlyPresent = false;
 
+    public $name = 'pagination';
+
+    public $title = 'Allows to paginate on sheet';
+
+    public $selected;
+
     /**
      * PaginationFilter constructor.
      */
@@ -21,6 +27,7 @@ class PaginationFilter extends SelectFilter
         ]);
 
         $this->setDefault(25);
+        $this->selected = $this->defaultValue;
     }
 
     public function apply(Request $request, Builder $builder, $index)

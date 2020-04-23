@@ -6,9 +6,7 @@
 
     <b-col sm="10">
       <component :field="field"
-                 :data="field.data"
-                 :value="field.data.text"
-                 @input="d => $emit('input', d)"
+                 v-model="field.data"
                  :is="field.type + '-form-field'"/>
     </b-col>
   </b-row>

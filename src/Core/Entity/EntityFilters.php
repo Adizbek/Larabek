@@ -21,7 +21,7 @@ trait EntityFilters
     public function getDefaultFilters()
     {
         return [
-            new PaginationFilter()
+            $this->pagination
         ];
     }
 

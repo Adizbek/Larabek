@@ -21,4 +21,11 @@ class TextField extends Field
             'text' => $model[$this->name]
         ];
     }
+
+    public function fillModel($model, $request, string $fieldName, $fieldData)
+    {
+        $model->setAttribute($fieldName, $fieldData['text']);
+    }
+
+
 }

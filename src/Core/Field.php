@@ -51,7 +51,7 @@ abstract class Field implements \JsonSerializable
         return [
             'type' => $this->type(),
             'name' => $this->getName(),
-            'data' => $model ? $this->transform($model) : ''
+            'data' => $model ? $this->transform($model) : json_decode('{}')
         ];
     }
 
@@ -72,7 +72,7 @@ abstract class Field implements \JsonSerializable
      */
     public function fillModel($model, $request, string $fieldName, $fieldData)
     {
-        $model->setAttribute($fieldName, $fieldData['data']);
+        $model->setAttribute($fieldName, $fieldData);
     }
 
 

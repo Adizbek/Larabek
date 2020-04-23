@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="localValue" class="form-control">
+    <input v-model="localValue.text" class="form-control">
   </div>
 </template>
 

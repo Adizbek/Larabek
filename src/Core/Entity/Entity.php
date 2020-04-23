@@ -4,6 +4,7 @@
 namespace Adizbek\Larabek\Core\Entity;
 
 use Adizbek\Larabek\Core\Field;
+use Adizbek\Larabek\Core\Filters\PaginationFilter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -13,6 +14,7 @@ abstract class Entity
     use EntitySheet, EntityDetails, EntityForm, EntityFilters, EntityActions;
 
     private $request;
+    protected $pagination = null;
 
     /**
      * Entity constructor.
@@ -21,6 +23,7 @@ abstract class Entity
     public function __construct(Request $request)
     {
         $this->request = $request;
+        $this->pagination = new PaginationFilter();
     }
 
     /**
@@ -87,7 +90,7 @@ abstract class Entity
             if (!$fieldName)
                 return;
 
-            $field->fillModel($model, $request, $fieldName, $fieldData);
+            $field->fillModel($model, $request, $fieldName, $fieldData['data']);
         });
     }
 }

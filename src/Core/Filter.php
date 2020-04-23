@@ -24,9 +24,15 @@ abstract class Filter implements \JsonSerializable
     {
         return [
             'title' => $this->title,
+            'key' => $this->getKey(),
             'name' => $this->name,
             'data' => $this->data
         ];
+    }
+
+    public function getKey()
+    {
+        return get_class($this);
     }
 }
 
