@@ -3,19 +3,26 @@
     <b-row>
       <b-col sm="12">
         <div class="card my-2">
-          <div class="card-body">
-            <div class="h3 mb-2 text-capitalize">{{entity}}</div>
-            <div>
-              <b-btn @click="$router.push({name: 'form', params: {entity: entity}})">Add new</b-btn>
-            </div>
+          <div class="card-header">
+            <div class="float-right d-flex align-items-center">
+              <div>
+                <div v-for="filter in filterList">
+                  <component v-model="filters[filter.key]" :is="`${filter.name}-filter`" :filter="filter"/>
+                </div>
+              </div>
 
-            <div>
-              <div v-for="filter in filterList">
-                <component v-model="filters[filter.key]" :is="`${filter.name}-filter`" :filter="filter"/>
+              <div class="ml-2">
+                <b-btn @click="$router.push({name: 'form', params: {entity: entity}})" variant="primary" size="sm">
+                  Add new
+                </b-btn>
               </div>
             </div>
 
-            <div class="table-responsive">
+            <div class="h3 mb-0 text-capitalize">{{entity}}</div>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive mb-0">
               <table class="table table-bordered table-sm">
                 <thead>
                 <tr>
@@ -42,15 +49,22 @@
                 </b-tbody>
               </table>
             </div>
+          </div>
 
+          <div class="card-footer d-flex align-items-center">
             <b-pagination
+              size="sm"
+              class="mb-0 flex-grow-1"
               v-if="data.list"
-              align="center"
               :value="data.list.current_page"
               @input="onPageChanged"
               :total-rows="data.list.total"
               :per-page="data.list.per_page"
             />
+
+            <div class="float-right d-flex align-items-center">
+              Showing {{paginationInfo.from}} to {{paginationInfo.to}} of {{paginationInfo.total}} entities
+            </div>
           </div>
         </div>
       </b-col>
@@ -130,6 +144,22 @@
           ...this.$route.query,
           ...this.query,
           filters: this.encodedFilters
+        }
+      },
+
+      paginationInfo() {
+        try {
+          let pp = this.data.list.per_page;
+          let cp = this.data.list.current_page;
+          let total = this.data.list.total;
+
+          return {
+            from: pp * (cp - 1) + 1,
+            to: Math.min(pp * cp, total),
+            total
+          }
+        } catch (e) {
+          return {}
         }
       },
 
