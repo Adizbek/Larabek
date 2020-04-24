@@ -5,20 +5,12 @@
 </template>
 
 <script>
+  import FieldMixin from "../../mixins/FieldMixin";
+
   export default {
     name: "TextFormField",
 
-    props: {
-      value: {}
-    },
-
-    data() {
-      return {
-        localValue: this.value
-      }
-    },
-
-    methods: {},
+    mixins: [FieldMixin],
 
     watch: {
       localValue(val) {

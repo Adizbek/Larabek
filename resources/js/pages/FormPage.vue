@@ -13,15 +13,13 @@
           </div>
 
           <div class="card-footer text-right">
-            <div v-if="!edit">
-              <b-btn variant="primary" size="sm" @click="create(true)">Create & Add another</b-btn>
-              <b-btn variant="primary" size="sm" @click="create(false)">Create</b-btn>
-            </div>
+            <b-btn variant="warning" size="sm" @click="resetForm()">Reset</b-btn>
 
-            <div v-else>
-              <b-btn variant="primary" size="sm" @click="save(true)">Save & Continue editing</b-btn>
-              <b-btn variant="primary" size="sm" @click="save(false)">Save</b-btn>
-            </div>
+            <b-btn v-if="!edit" variant="primary" size="sm" @click="create(true)">Create & Add another</b-btn>
+            <b-btn v-if="!edit" variant="primary" size="sm" @click="create(false)">Create</b-btn>
+
+            <b-btn v-if="edit" variant="primary" size="sm" @click="save(true)">Save & Continue editing</b-btn>
+            <b-btn v-if="edit" variant="primary" size="sm" @click="save(false)">Save</b-btn>
           </div>
         </div>
       </b-col>
@@ -31,6 +29,7 @@
 
 <script>
   import LToast from "../core/LToast";
+  import {LarabekEvents} from "../core/consts";
 
   export default {
     name: "FormPage",
@@ -60,6 +59,10 @@
         }
       },
 
+      resetForm() {
+        Larabek.emit(LarabekEvents.ResetField);
+      },
+
       save(continueEditing = false) {
         this.$http.post(`form/${this.entity}/${this.id}`, {
           data: this.fields
@@ -70,6 +73,8 @@
             Larabek.navigation.openSheet(this.entity);
 
           LToast.show('success', 'Success', 'Entity has been saved')
+        }).catch(e => {
+          LToast.show('danger', 'Error', e.response.data.message)
         })
       },
 
@@ -81,9 +86,13 @@
 
           if (!addNew) {
             Larabek.navigation.openSheet(this.entity);
+          } else {
+            this.resetForm();
           }
 
           LToast.show('success', 'Success', 'Entity has created')
+        }).catch(e => {
+          LToast.show('danger', 'Error', e.response.data.message)
         })
       }
     },
