@@ -33,8 +33,12 @@ trait EntityFilters
 
     private function applyFilters(Builder $query): Builder
     {
+        $appliedFilters = json_decode(base64_decode(request()->query('filters')));
+
         foreach ($this->getFilters() as $filter) {
-            $filter->apply($this->request, $query, null);
+            $value = $appliedFilters ? $appliedFilters->{$filter->getKey()} : null;
+
+            $filter->setValueAndApply($this->request, $query, $value);
         }
 
         return $query;

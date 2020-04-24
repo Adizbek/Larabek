@@ -18,6 +18,9 @@ abstract class Filter implements \JsonSerializable
 
     public $applyOnlyPresent = true;
 
+    public $value = null;
+    public $defaultValue = null;
+
     public abstract function apply(Request $request, Builder $builder, $value);
 
     public function jsonSerialize()
@@ -26,13 +29,26 @@ abstract class Filter implements \JsonSerializable
             'title' => $this->title,
             'key' => $this->getKey(),
             'name' => $this->name,
-            'data' => $this->data
+            'data' => $this->data,
+            'value' => $this->value,
+            'defaultValue' => $this->defaultValue
         ];
     }
 
     public function getKey()
     {
         return get_class($this);
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function setValueAndApply(Request $request, Builder $builder, $value)
+    {
+        $this->setValue($value);
+        $this->apply($request, $builder, $value);
     }
 }
 

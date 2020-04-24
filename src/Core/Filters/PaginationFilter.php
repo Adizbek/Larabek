@@ -15,7 +15,6 @@ class PaginationFilter extends SelectFilter
 
     public $title = 'Allows to paginate on sheet';
 
-    public $selected;
 
     /**
      * PaginationFilter constructor.
@@ -26,7 +25,7 @@ class PaginationFilter extends SelectFilter
             10, 25, 50, 100
         ]);
 
-        $this->setDefault(25);
+        $this->setDefault(1);
         $this->selected = $this->defaultValue;
     }
 
@@ -39,4 +38,11 @@ class PaginationFilter extends SelectFilter
 
         return $builder->limit($limit)->offset($offset);
     }
+
+    public function getKey()
+    {
+        return 'pagination';
+    }
+
+
 }

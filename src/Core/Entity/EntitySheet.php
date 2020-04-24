@@ -32,7 +32,7 @@ trait EntitySheet
         $query = $this->applyFilters($this->getListQuery());
 
         /** @var LengthAwarePaginator $pagination */
-        $pagination = $query->paginate($this->pagination->selected);
+        $pagination = $query->paginate($this->pagination->getSelectedValue());
 
         $pagination->getCollection()->transform(function ($model) {
             return [

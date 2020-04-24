@@ -9,6 +9,12 @@
               <b-btn @click="$router.push({name: 'form', params: {entity: entity}})">Add new</b-btn>
             </div>
 
+            <div>
+              <div v-for="filter in filterList">
+                <component v-model="filters[filter.key]" :is="`${filter.name}-filter`" :filter="filter"/>
+              </div>
+            </div>
+
             <div class="table-responsive">
               <table class="table table-bordered table-sm">
                 <thead>
@@ -61,21 +67,21 @@
     data() {
       return {
         data: [],
-        filters: {},
+        filters: this.$route.query.filters ? JSON.parse(atob(this.$route.query.filters)) : {},
         query: {
           page: this.$route.query.page || '1'
         }
       }
     },
 
-    created() {
+    mounted() {
       this.fetchData();
     },
 
     methods: {
       fetchData() {
         this.$http.post(`list/${this.entity}`, {}, {
-          params: this.query
+          params: this.listParams
         }).then(res => {
           this.data = res.data
         })
@@ -107,14 +113,23 @@
         return this.data && this.data.actions;
       },
 
+      filterList() {
+        return this.data && this.data.filters;
+      },
+
       encodedFilters() {
-        return atob(JSON.stringify(this.filters))
+        return this.appliedFiltersCount > 0 ? btoa(JSON.stringify(this.filters)) : undefined
+      },
+
+      appliedFiltersCount() {
+        return Object.keys(this.filters).length
       },
 
       listParams() {
         return {
           ...this.$route.query,
-          filter: this.filters
+          ...this.query,
+          filters: this.encodedFilters
         }
       },
 
@@ -124,7 +139,7 @@
     },
 
     watch: {
-      query: {
+      listParams: {
         deep: true,
         handler(query) {
           let location = this.$router.resolve({

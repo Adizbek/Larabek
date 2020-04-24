@@ -23,3 +23,23 @@ requireComponent.keys().forEach(fileName => {
         componentConfig.default || componentConfig
     )
 });
+
+const requireFilters = require.context(
+    './components/filters/',
+    true,
+    /[A-Z]\w+\.(vue|js)$/
+);
+
+
+requireFilters.keys().forEach(fileName => {
+    const componentConfig = requireFilters(fileName);
+
+    const componentName = kebabCase(
+        componentConfig.default.name
+    );
+
+    Vue.component(
+        componentName,
+        componentConfig.default || componentConfig
+    )
+});

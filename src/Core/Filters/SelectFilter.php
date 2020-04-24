@@ -9,7 +9,6 @@ use Adizbek\Larabek\Core\Filter;
 abstract class SelectFilter extends Filter
 {
     public $options = [];
-    public $defaultValue = null;
 
     public function setOptions($options)
     {
@@ -18,11 +17,16 @@ abstract class SelectFilter extends Filter
 
     public function setDefault($option)
     {
-        $this->data['default'] = $this->defaultValue = $option;
+        $this->defaultValue = $option;
     }
 
     public function getValue($index)
     {
-        return $options[$index] ?? $this->defaultValue;
+        return $this->options[$index] ?? $this->getValue($this->defaultValue);
+    }
+
+    public function getSelectedValue()
+    {
+        return $this->getValue($this->value);
     }
 }
