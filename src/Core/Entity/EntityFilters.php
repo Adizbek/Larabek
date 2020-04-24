@@ -23,13 +23,14 @@ trait EntityFilters
         $appliedFilters = json_decode(base64_decode(request()->query('filters')));
         $filters = $this->getFilters();
 
-        foreach ($filters as $filter) {
-            $value = $appliedFilters->{$filter->getKey()};
+        if ($appliedFilters)
+            foreach ($filters as $filter) {
+                $value = $appliedFilters->{$filter->getKey()};
 
-            if (isset($value)) {
-                $filter->setValue($value);
+                if (isset($value)) {
+                    $filter->setValue($value);
+                }
             }
-        }
 
         return $filters;
     }
