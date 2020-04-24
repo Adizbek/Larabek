@@ -18,6 +18,22 @@ trait EntityFilters
         return $this->getDefaultFilters() + $this->filters();
     }
 
+    public function fillFilters()
+    {
+        $appliedFilters = json_decode(base64_decode(request()->query('filters')));
+        $filters = $this->getFilters();
+
+        foreach ($filters as $filter) {
+            $value = $appliedFilters->{$filter->getKey()};
+
+            if (isset($value)) {
+                $filter->setValue($value);
+            }
+        }
+
+        return $filters;
+    }
+
     public function getDefaultFilters()
     {
         return [
@@ -33,12 +49,8 @@ trait EntityFilters
 
     private function applyFilters(Builder $query): Builder
     {
-        $appliedFilters = json_decode(base64_decode(request()->query('filters')));
-
         foreach ($this->getFilters() as $filter) {
-            $value = $appliedFilters ? $appliedFilters->{$filter->getKey()} : null;
-
-            $filter->setValueAndApply($this->request, $query, $value);
+            $filter->apply($this->request, $query, $filter->value);
         }
 
         return $query;

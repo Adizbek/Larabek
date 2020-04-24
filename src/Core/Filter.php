@@ -44,11 +44,5 @@ abstract class Filter implements \JsonSerializable
     {
         $this->value = $value;
     }
-
-    public function setValueAndApply(Request $request, Builder $builder, $value)
-    {
-        $this->setValue($value);
-        $this->apply($request, $builder, $value);
-    }
 }
 

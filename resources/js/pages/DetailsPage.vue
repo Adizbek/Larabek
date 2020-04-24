@@ -1,13 +1,13 @@
 <template>
   <b-container fluid>
     <b-row>
-      <b-col sm="12" class="mt-2">
-        <div class="float-right">
+      <b-col sm="12" class="mt-3">
+        <div class="float-right d-flex">
           <Action :model="model" :entity="entity" :action="action" :key="index" v-for="(action,index) in actions"/>
         </div>
 
-        <div class="h4">
-          {{this.entity }} Details
+        <div class="h4 text-capitalize">
+          {{this.entity }} details
         </div>
       </b-col>
 

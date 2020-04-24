@@ -11,6 +11,10 @@ class EditAction extends Action
 
     public $text = 'edit';
 
+    public $icon = ['far', 'edit'];
+
+    public $batch = false;
+
     public function actionName()
     {
         return 'edit-action';

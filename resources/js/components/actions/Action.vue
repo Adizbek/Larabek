@@ -1,13 +1,21 @@
 <template>
-  <div @click="trigger" class="d-inline-block btn btn-primary btn-sm" :class="{'mr-1': !last}">{{action.text}}</div>
+  <div @click="trigger" class="badge badge-light action"
+       :class="{'mr-1': !last,'justify-content-center': !action.showText}">
+    <Icon v-if="action.showIcon && action.icon" :icon="action.icon"
+          :class="{'mr-1': action.showText}"/>
+    <span v-if="action.showText">{{action.text}}</span>
+  </div>
 </template>
 
 <script>
 
   import {LarabekEvents} from "../../core/consts";
+  import ActionConfirmation from "./ActionConfirmation";
+  import Icon from "../admin/Icon";
 
   export default {
     name: "Action",
+    components: {Icon},
     props: {
       action: {
         type: Object,
@@ -37,19 +45,41 @@
         } else if (this.isEditAction) {
           Larabek.navigation.openForm(this.entity, this.model.id)
         } else {
-          this.processDefaultAction();
+          if (this.needConfirm) {
+            this.askConfirmation(this.processDefaultAction);
+          } else {
+            this.processDefaultAction();
+          }
         }
       },
 
-      processDefaultAction() {
+      async processDefaultAction() {
+        let models = Array.isArray(this.model) ? this.model.map(x => x.id) : [this.model.id]
+
         this.$http.post(`action/${this.entity}/${this.action.name}`, {
           action: this.action.name,
           data: [],
-          models: [this.model.id]
+          models
         }).then(res => {
+          Larabek.emit(LarabekEvents.AfterActionDone, this.entity, this.action, this.model);
+
           console.log(res.data)
         })
+      },
+
+      /**
+       * @param {?function} onAllowed
+       */
+      askConfirmation(onAllowed) {
+        this.$modal.show(ActionConfirmation, {
+          onAllowed,
+          confirmation: this.action.confirm
+        }, {
+          height: 'auto',
+          clickToClose: true
+        })
       }
+
     },
 
     computed: {
@@ -59,11 +89,28 @@
 
       isEditAction() {
         return this.action.name === 'edit-action'
+      },
+
+      needConfirm() {
+        return true;
       }
     }
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .action {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    height: 31px;
+    min-width: 31px;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+    opacity: .7;
 
+    &:hover {
+      opacity: 1;
+    }
+  }
 </style>

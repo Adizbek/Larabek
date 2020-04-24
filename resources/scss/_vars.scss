@@ -5,6 +5,9 @@ $sidebar-text-color: #000;
 $sidebar-border-color: darken($sidebar-background-color, 10%);
 $sidebar-width: 230px;
 
+$border-color: rgba(0, 0, 0, .075);
+$card-border-color: rgba(0, 0, 0, .075);
+
 :root {
     --sidebar-background-color: #{$sidebar-background-color};
     --sidebar-text-color: #{$sidebar-text-color};

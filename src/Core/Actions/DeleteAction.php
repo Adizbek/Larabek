@@ -10,6 +10,11 @@ class DeleteAction extends Action
 {
 
     public $text = 'delete';
+    public $confirm = true;
+
+    public $icon = ['far', 'trash-alt'];
+
+    public $confirmMessage = 'Do you want to delete selected ?';
 
     public function actionName()
     {

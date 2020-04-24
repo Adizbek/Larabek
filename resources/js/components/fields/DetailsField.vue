@@ -1,6 +1,6 @@
 <template>
   <b-row class="py-2">
-    <b-col sm="2">
+    <b-col sm="2" class="text-capitalize">
       {{field.name}}
     </b-col>
 

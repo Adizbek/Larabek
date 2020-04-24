@@ -26,7 +26,7 @@ class PaginationFilter extends SelectFilter
         ]);
 
         $this->setDefault(1);
-        $this->selected = $this->defaultValue;
+        $this->value = $this->defaultValue;
     }
 
     public function apply(Request $request, Builder $builder, $index)

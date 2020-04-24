@@ -50,10 +50,13 @@ trait EntitySheet
 
     public function getListMeta()
     {
+        // fill filters with values from request and get them
+        $filters = $this->fillFilters();
+
         return [
             'list' => $this->getList(),
             'fields' => $this->getSheetFields(),
-            'filters' => $this->getFilters(),
+            'filters' => $filters,
             'actions' => $this->getActions()
         ];
     }
