@@ -13,10 +13,15 @@ Vue.prototype.$http = axios;
 
 import './components'
 import './core/Larabek'
+import LToast from "./core/LToast";
 
-window.vm = new Vue({
+let app = new Vue({
     // i18n,
     router,
     // store,
     render: h => h(AdminApp)
-}).$mount('#admin');
+});
+
+LToast.toaster = app;
+
+window.vm = app.$mount('#admin');

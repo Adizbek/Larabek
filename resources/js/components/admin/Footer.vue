@@ -1,8 +1,8 @@
 <template>
   <div class="footer">
-    <div>Powered by Adizbek/Larabek</div>
+    <div>Powered by <a href="https://github.com/Adizbek/Larabek" target="_blank">Larabek</a></div>
     <div>
-      Github <a target="_blank" href="https://github.com/adizbek">@adizbek</a>
+      Copyright  <a target="_blank" href="https://github.com/adizbek">@adizbek</a>
     </div>
   </div>
 </template>

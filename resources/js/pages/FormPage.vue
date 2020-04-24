@@ -3,7 +3,7 @@
     <b-row>
       <b-col sm="12" class="mt-2">
         <div class="card">
-          <div class="card-header">Edit {{entity}}</div>
+          <div class="card-header">{{edit ? 'Edit' : 'Add'}} {{entity}}</div>
 
           <div class="card-body">
             <form-field :key="field.name"
@@ -13,8 +13,15 @@
           </div>
 
           <div class="card-footer text-right">
-            <b-btn variant="primary">Save & Add another</b-btn>
-            <b-btn variant="primary" @click="save">Save</b-btn>
+            <div v-if="!edit">
+              <b-btn variant="primary" size="sm" @click="create(true)">Create & Add another</b-btn>
+              <b-btn variant="primary" size="sm" @click="create(false)">Create</b-btn>
+            </div>
+
+            <div v-else>
+              <b-btn variant="primary" size="sm" @click="save(true)">Save & Continue editing</b-btn>
+              <b-btn variant="primary" size="sm" @click="save(false)">Save</b-btn>
+            </div>
           </div>
         </div>
       </b-col>
@@ -23,6 +30,8 @@
 </template>
 
 <script>
+  import LToast from "../core/LToast";
+
   export default {
     name: "FormPage",
 
@@ -51,24 +60,31 @@
         }
       },
 
-      save() {
-        if (this.edit) {
+      save(continueEditing = false) {
+        this.$http.post(`form/${this.entity}/${this.id}`, {
+          data: this.fields
+        }).then(res => {
+          this.item = res.data
 
-          this.$http.post(`form/${this.entity}/${this.id}`, {
-            data: this.fields
-          }).then(res => {
-            this.item = res.data
-          })
+          if (!continueEditing)
+            Larabek.navigation.openSheet(this.entity);
 
-        } else {
+          LToast.show('success', 'Success', 'Entity has been saved')
+        })
+      },
 
-          this.$http.post(`form/${this.entity}`, {
-            data: this.fields
-          }).then(res => {
-            this.item = res.data
-          })
+      create(addNew = false) {
+        this.$http.post(`form/${this.entity}`, {
+          data: this.fields
+        }).then(res => {
+          this.item = res.data
 
-        }
+          if (!addNew) {
+            Larabek.navigation.openSheet(this.entity);
+          }
+
+          LToast.show('success', 'Success', 'Entity has created')
+        })
       }
     },
 
