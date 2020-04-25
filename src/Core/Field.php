@@ -30,6 +30,12 @@ abstract class Field implements \JsonSerializable
         return $this->name;
     }
 
+    public static function make(...$args): Field
+    {
+        $class = get_called_class();
+        return new $class(...$args);
+    }
+
     public abstract function type(): string;
 
     public abstract function transform(Model $model);
