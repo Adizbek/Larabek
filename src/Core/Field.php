@@ -34,7 +34,7 @@ abstract class Field implements \JsonSerializable
         return $this->name;
     }
 
-    public static function make(...$args): Field
+    public static function make(...$args): self
     {
         $class = get_called_class();
         return new $class(...$args);
