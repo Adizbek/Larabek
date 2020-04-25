@@ -13,15 +13,15 @@
 </template>
 
 <script>
-  export default {
-    name: "DetailsField",
+export default {
+  name: "DetailsField",
 
-    props: {
-      data: {},
-      field: {},
-      component: {}
-    }
+  props: {
+    data: {},
+    field: {},
+    component: {}
   }
+}
 </script>
 
 <style scoped>

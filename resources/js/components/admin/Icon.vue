@@ -3,33 +3,33 @@
 </template>
 
 <script>
-  export default {
-    name: 'Icon',
+export default {
+  name: 'Icon',
 
-    props: {
-      type: {
-        type: String,
-        default: 'fas'
-      },
-
-      size: {
-        type: String,
-        default: 'sm'
-      },
-
-      icon: {}
+  props: {
+    type: {
+      type: String,
+      default: 'fas'
     },
 
-    computed: {
-      iconType () {
-        if (Array.isArray(this.icon)) {
-          return this.icon
-        }
+    size: {
+      type: String,
+      default: 'sm'
+    },
 
-        return [this.type, this.icon]
+    icon: {}
+  },
+
+  computed: {
+    iconType() {
+      if (Array.isArray(this.icon)) {
+        return this.icon
       }
+
+      return [this.type, this.icon]
     }
   }
+}
 </script>
 
 <style scoped>

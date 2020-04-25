@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
 import HomePage from "./pages/HomePage";
-import ListItemsPage from "./pages/ListItemsPage";
+import SheetPage from "./pages/sheet/SheetPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import DetailsPage from "./pages/DetailsPage";
 import FormPage from "./pages/FormPage";
@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 
 const routes = [
     {path: '/', component: HomePage, name: 'home'},
-    {path: '/list/:entity', component: ListItemsPage, name: 'list'},
+    {path: '/sheet/:entity', component: SheetPage, name: 'sheet'},
     {path: '/details/:entity/:id', component: DetailsPage, name: 'details'},
     {path: '/form/:entity/:id?', component: FormPage, name: 'form'},
     {path: '*', component: NotFoundPage}

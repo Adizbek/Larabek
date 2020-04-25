@@ -14,22 +14,22 @@
 </template>
 
 <script>
-  export default {
-    name: "ActionConfirmation",
+export default {
+  name: "ActionConfirmation",
 
-    props: {
-      onAllowed: Function,
-      confirmation: {}
-    },
+  props: {
+    onAllowed: Function,
+    confirmation: {}
+  },
 
-    methods: {
-      async onConfirmed() {
-        this.onAllowed && await this.onAllowed();
+  methods: {
+    async onConfirmed() {
+      this.onAllowed && await this.onAllowed();
 
-        this.$emit('close');
-      }
+      this.$emit('close');
     }
   }
+}
 </script>
 
 <style scoped>

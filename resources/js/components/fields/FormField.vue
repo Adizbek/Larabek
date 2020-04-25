@@ -13,16 +13,16 @@
 </template>
 
 <script>
-  export default {
-    name: "FormField",
+export default {
+  name: "FormField",
 
-    props: {
-      data: {},
-      field: {},
-      component: {},
-      value: {}
-    }
+  props: {
+    data: {},
+    field: {},
+    component: {},
+    value: {}
   }
+}
 </script>
 
 <style scoped>

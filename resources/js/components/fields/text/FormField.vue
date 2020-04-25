@@ -5,19 +5,19 @@
 </template>
 
 <script>
-  import FieldMixin from "../../mixins/FieldMixin";
+import FieldMixin from "../../mixins/FieldMixin";
 
-  export default {
-    name: "TextFormField",
+export default {
+  name: "TextFormField",
 
-    mixins: [FieldMixin],
+  mixins: [FieldMixin],
 
-    watch: {
-      localValue(val) {
-        this.$emit('input', val);
-      }
+  watch: {
+    localValue(val) {
+      this.$emit('input', val);
     }
   }
+}
 </script>
 
 <style scoped>

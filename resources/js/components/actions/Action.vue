@@ -9,93 +9,93 @@
 
 <script>
 
-  import {LarabekEvents} from "../../core/consts";
-  import ActionConfirmation from "./ActionConfirmation";
-  import Icon from "../admin/Icon";
+import {LarabekEvents} from "../../core/consts";
+import ActionConfirmation from "./ActionConfirmation";
+import Icon from "../admin/Icon";
 
-  export default {
-    name: "Action",
-    components: {Icon},
-    props: {
-      action: {
-        type: Object,
-        required: true
-      },
-
-      entity: {
-        type: String,
-        required: true
-      },
-
-      model: {},
-
-      last: {
-        default: false,
-        required: false,
-        type: Boolean
-      }
+export default {
+  name: "Action",
+  components: {Icon},
+  props: {
+    action: {
+      type: Object,
+      required: true
     },
 
-    methods: {
-      trigger() {
-        Larabek.emit(LarabekEvents.Action, this.entity, this.action, this.model);
+    entity: {
+      type: String,
+      required: true
+    },
 
-        if (this.isDetailsAction) {
-          Larabek.navigation.openDetails(this.entity, this.model.id);
-        } else if (this.isEditAction) {
-          Larabek.navigation.openForm(this.entity, this.model.id)
+    model: {},
+
+    last: {
+      default: false,
+      required: false,
+      type: Boolean
+    }
+  },
+
+  methods: {
+    trigger() {
+      Larabek.emit(LarabekEvents.Action, this.entity, this.action, this.model);
+
+      if (this.isDetailsAction) {
+        Larabek.navigation.openDetails(this.entity, this.model.id);
+      } else if (this.isEditAction) {
+        Larabek.navigation.openForm(this.entity, this.model.id)
+      } else {
+        if (this.needConfirm) {
+          this.askConfirmation(this.processDefaultAction);
         } else {
-          if (this.needConfirm) {
-            this.askConfirmation(this.processDefaultAction);
-          } else {
-            this.processDefaultAction();
-          }
+          this.processDefaultAction();
         }
-      },
-
-      async processDefaultAction() {
-        let models = Array.isArray(this.model) ? this.model.map(x => x.id) : [this.model.id]
-
-        this.$http.post(`action/${this.entity}/${this.action.name}`, {
-          action: this.action.name,
-          data: [],
-          models
-        }).then(res => {
-          Larabek.emit(LarabekEvents.AfterActionDone, this.entity, this.action, this.model);
-
-          console.log(res.data)
-        })
-      },
-
-      /**
-       * @param {?function} onAllowed
-       */
-      askConfirmation(onAllowed) {
-        this.$modal.show(ActionConfirmation, {
-          onAllowed,
-          confirmation: this.action.confirm
-        }, {
-          height: 'auto',
-          clickToClose: true
-        })
       }
-
     },
 
-    computed: {
-      isDetailsAction() {
-        return this.action.name === 'details-action'
-      },
+    async processDefaultAction() {
+      let models = Array.isArray(this.model) ? this.model.map(x => x.id) : [this.model.id]
 
-      isEditAction() {
-        return this.action.name === 'edit-action'
-      },
+      this.$http.post(`action/${this.entity}/${this.action.name}`, {
+        action: this.action.name,
+        data: [],
+        models
+      }).then(res => {
+        Larabek.emit(LarabekEvents.AfterActionDone, this.entity, this.action, this.model);
 
-      needConfirm() {
-        return true;
-      }
+        console.log(res.data)
+      })
+    },
+
+    /**
+     * @param {?function} onAllowed
+     */
+    askConfirmation(onAllowed) {
+      this.$modal.show(ActionConfirmation, {
+        onAllowed,
+        confirmation: this.action.confirm
+      }, {
+        height: 'auto',
+        clickToClose: true
+      })
+    }
+
+  },
+
+  computed: {
+    isDetailsAction() {
+      return this.action.name === 'details-action'
+    },
+
+    isEditAction() {
+      return this.action.name === 'edit-action'
+    },
+
+    needConfirm() {
+      return true;
     }
   }
+}
 </script>
 
 <style scoped lang="scss">

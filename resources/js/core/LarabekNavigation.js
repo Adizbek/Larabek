@@ -17,7 +17,7 @@ export default class LarabekNavigation {
 
     async openSheet(entity) {
         return router.push({
-            name: 'list',
+            name: 'sheet',
             params: {entity}
         })
     }

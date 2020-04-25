@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 abstract class Field implements \JsonSerializable
 {
     use Hideable;
+    use FieldSortable;
 
     protected $name;
 
@@ -60,7 +61,8 @@ abstract class Field implements \JsonSerializable
     {
         return [
             'name' => $this->name,
-            'type' => $this->type()
+            'type' => $this->type(),
+            'sortable' => $this->sortableData(),
         ];
     }
 

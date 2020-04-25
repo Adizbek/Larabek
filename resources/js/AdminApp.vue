@@ -12,18 +12,18 @@
 </template>
 
 <script>
-  import Sidebar from "./components/admin/Sidebar";
-  import MainView from "./components/admin/MainView";
-  import Navbar from "./components/admin/Navbar";
-  import Footer from "./components/admin/Footer";
+import Sidebar from "./components/admin/Sidebar";
+import MainView from "./components/admin/MainView";
+import Navbar from "./components/admin/Navbar";
+import Footer from "./components/admin/Footer";
 
-  export default {
-    name: "App",
-    components: {Footer, Navbar, MainView, Sidebar},
+export default {
+  name: "App",
+  components: {Footer, Navbar, MainView, Sidebar},
 
-    mounted() {
-    }
+  mounted() {
   }
+}
 </script>
 
 <style scoped>

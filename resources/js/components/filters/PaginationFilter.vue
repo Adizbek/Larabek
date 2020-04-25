@@ -5,26 +5,26 @@
 </template>
 
 <script>
-  import FilterMixin from "../mixins/FilterMixin";
+import FilterMixin from "../mixins/FilterMixin";
 
-  export default {
-    name: "PaginationFilter",
+export default {
+  name: "PaginationFilter",
 
-    mixins: [FilterMixin],
+  mixins: [FilterMixin],
 
-    computed: {
-      options() {
-        return this.filterData.options.reduce((arr, item, index) => {
-          arr.push({
-            value: index,
-            text: item
-          })
+  computed: {
+    options() {
+      return this.filterData.options.reduce((arr, item, index) => {
+        arr.push({
+          value: index,
+          text: item
+        })
 
-          return arr;
-        }, [])
-      }
+        return arr;
+      }, [])
     }
   }
+}
 </script>
 
 <style scoped>

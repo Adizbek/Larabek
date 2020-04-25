@@ -3,13 +3,13 @@
 </template>
 
 <script>
-  export default {
-    name: "TextDetailsField",
-    props: {
-      data: {},
-      field: {}
-    }
+export default {
+  name: "TextDetailsField",
+  props: {
+    data: {},
+    field: {}
   }
+}
 </script>
 
 <style scoped>

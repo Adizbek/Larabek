@@ -26,52 +26,52 @@
 </template>
 
 <script>
-  import Action from "../components/actions/Action";
+import Action from "../components/actions/Action";
 
-  export default {
-    name: "DetailsPage",
-    components: {Action},
-    data() {
-      return {
-        item: {}
-      }
+export default {
+  name: "DetailsPage",
+  components: {Action},
+  data() {
+    return {
+      item: {}
+    }
+  },
+
+  created() {
+    this.loadEntity()
+  },
+
+  methods: {
+    loadEntity() {
+      this.$http.post(`details/${this.entity}/${this.id}`).then(res => {
+        this.item = res.data
+      })
+    }
+  },
+
+
+  computed: {
+    entity() {
+      return this.$route.params.entity
     },
 
-    created() {
-      this.loadEntity()
+    id() {
+      return this.$route.params.id
     },
 
-    methods: {
-      loadEntity() {
-        this.$http.post(`details/${this.entity}/${this.id}`).then(res => {
-          this.item = res.data
-        })
-      }
+    model() {
+      return this.item.model
     },
 
+    fields() {
+      return this.item.fields
+    },
 
-    computed: {
-      entity() {
-        return this.$route.params.entity
-      },
-
-      id() {
-        return this.$route.params.id
-      },
-
-      model() {
-        return this.item.model
-      },
-
-      fields() {
-        return this.item.fields
-      },
-
-      actions() {
-        return this.item.actions
-      }
+    actions() {
+      return this.item.actions
     }
   }
+}
 </script>
 
 <style scoped>

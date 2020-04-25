@@ -4,7 +4,7 @@
       <div class="menu">
         <div class="menu-header">Models</div>
 
-        <router-link tag="a" :to="{name: 'list', params: {entity: entity.name}}"
+        <router-link tag="a" :to="{name: 'sheet', params: {entity: entity.name}}"
                      :key="entity.name"
                      class="menu-item"
                      active-class="menu-item-active"
@@ -17,23 +17,23 @@
 </template>
 
 <script>
-  import store from "../../store";
+import store from "../../store";
 
-  export default {
-    name: "Sidebar",
+export default {
+  name: "Sidebar",
 
-    mounted() {
-      this.$http.post('entities').then(res => {
-        store.entities = res.data
-      })
-    },
+  mounted() {
+    this.$http.post('entities').then(res => {
+      store.entities = res.data
+    })
+  },
 
-    computed: {
-      entities() {
-        return store.entities;
-      }
+  computed: {
+    entities() {
+      return store.entities;
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

@@ -28,98 +28,98 @@
 </template>
 
 <script>
-  import LToast from "../core/LToast";
-  import {LarabekEvents} from "../core/consts";
+import LToast from "../core/LToast";
+import {LarabekEvents} from "../core/consts";
 
-  export default {
-    name: "FormPage",
+export default {
+  name: "FormPage",
 
-    data() {
-      return {
-        item: {},
+  data() {
+    return {
+      item: {},
 
-        edit: !!this.$route.params.id
+      edit: !!this.$route.params.id
+    }
+  },
+
+  created() {
+    this.loadEntity()
+  },
+
+  methods: {
+    loadEntity() {
+      if (this.edit) {
+        this.$http.get(`form/${this.entity}/${this.id}`).then(res => {
+          this.item = res.data
+        })
+      } else {
+        this.$http.get(`form/${this.entity}`).then(res => {
+          this.item = res.data
+        })
       }
     },
 
-    created() {
-      this.loadEntity()
+    resetForm() {
+      Larabek.emit(LarabekEvents.ResetField);
     },
 
-    methods: {
-      loadEntity() {
-        if (this.edit) {
-          this.$http.get(`form/${this.entity}/${this.id}`).then(res => {
-            this.item = res.data
-          })
+    save(continueEditing = false) {
+      this.$http.post(`form/${this.entity}/${this.id}`, {
+        data: this.fields
+      }).then(res => {
+        this.item = res.data
+
+        if (!continueEditing)
+          Larabek.navigation.openSheet(this.entity);
+
+        LToast.show('success', 'Success', 'Entity has been saved')
+      }).catch(e => {
+        LToast.show('danger', 'Error', e.response.data.message)
+      })
+    },
+
+    create(addNew = false) {
+      this.$http.post(`form/${this.entity}`, {
+        data: this.fields
+      }).then(res => {
+        this.item = res.data
+
+        if (!addNew) {
+          Larabek.navigation.openSheet(this.entity);
         } else {
-          this.$http.get(`form/${this.entity}`).then(res => {
-            this.item = res.data
-          })
+          this.resetForm();
         }
-      },
 
-      resetForm() {
-        Larabek.emit(LarabekEvents.ResetField);
-      },
+        LToast.show('success', 'Success', 'Entity has created')
+      }).catch(e => {
+        LToast.show('danger', 'Error', e.response.data.message)
+      })
+    }
+  },
 
-      save(continueEditing = false) {
-        this.$http.post(`form/${this.entity}/${this.id}`, {
-          data: this.fields
-        }).then(res => {
-          this.item = res.data
 
-          if (!continueEditing)
-            Larabek.navigation.openSheet(this.entity);
-
-          LToast.show('success', 'Success', 'Entity has been saved')
-        }).catch(e => {
-          LToast.show('danger', 'Error', e.response.data.message)
-        })
-      },
-
-      create(addNew = false) {
-        this.$http.post(`form/${this.entity}`, {
-          data: this.fields
-        }).then(res => {
-          this.item = res.data
-
-          if (!addNew) {
-            Larabek.navigation.openSheet(this.entity);
-          } else {
-            this.resetForm();
-          }
-
-          LToast.show('success', 'Success', 'Entity has created')
-        }).catch(e => {
-          LToast.show('danger', 'Error', e.response.data.message)
-        })
-      }
+  computed: {
+    entity() {
+      return this.$route.params.entity
     },
 
+    id() {
+      return this.$route.params.id
+    },
 
-    computed: {
-      entity() {
-        return this.$route.params.entity
-      },
+    model() {
+      return this.item.model
+    },
 
-      id() {
-        return this.$route.params.id
-      },
+    fields() {
+      return this.item.fields
+    },
 
-      model() {
-        return this.item.model
-      },
-
-      fields() {
-        return this.item.fields
-      },
-
-      actions() {
-        return this.item.actions
-      }
+    actions() {
+      return this.item.actions
     }
   }
+}
 </script>
 
 <style scoped>

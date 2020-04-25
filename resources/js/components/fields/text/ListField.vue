@@ -3,14 +3,14 @@
 </template>
 
 <script>
-  export default {
-    name: "TextListField",
+export default {
+  name: "TextListField",
 
-    props: {
-      data: {},
-      field: {}
-    }
+  props: {
+    data: {},
+    field: {}
   }
+}
 </script>
 
 <style scoped>

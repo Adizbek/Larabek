@@ -2,15 +2,15 @@
   <div class="footer">
     <div>Powered by <a href="https://github.com/Adizbek/Larabek" target="_blank">Larabek</a></div>
     <div>
-      Copyright  <a target="_blank" href="https://github.com/adizbek">@adizbek</a>
+      Copyright <a target="_blank" href="https://github.com/adizbek">@adizbek</a>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "Footer"
-  }
+export default {
+  name: "Footer"
+}
 </script>
 
 <style scoped lang="scss">
