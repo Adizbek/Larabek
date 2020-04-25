@@ -4,7 +4,7 @@
 namespace Adizbek\Larabek\Core;
 
 
-trait FieldSortable
+abstract class SortableField extends Field
 {
     protected $sortable = false;
     protected $sortDirection = null;

@@ -9,17 +9,21 @@ use Illuminate\Database\Eloquent\Model;
 abstract class Field implements \JsonSerializable
 {
     use Hideable;
-    use FieldSortable;
 
     protected $name;
+    protected $label;
+
+    protected $extra = [];
 
     /**
      * Field constructor.
      * @param $name
+     * @param string $label
      */
-    public function __construct($name)
+    public function __construct($name, $label = '')
     {
         $this->name = $name;
+        $this->label = $label;
     }
 
     /**
@@ -38,14 +42,14 @@ abstract class Field implements \JsonSerializable
 
     public abstract function type(): string;
 
-    public abstract function transform(Model $model);
+    public abstract function transform(Model $model, bool $form);
 
     public function getData(Model $model)
     {
         return [
             'type' => $this->type(),
             'name' => $this->getName(),
-            'data' => $this->transform($model)
+            'data' => $this->transform($model, false)
         ];
     }
 
@@ -58,18 +62,19 @@ abstract class Field implements \JsonSerializable
         return [
             'type' => $this->type(),
             'name' => $this->getName(),
-            'data' => $model ? $this->transform($model) : json_decode('{}')
+            'data' => $model ? $this->transform($model, true) : json_decode('{}')
         ];
     }
 
 
     public function jsonSerialize()
     {
-        return [
-            'name' => $this->name,
-            'type' => $this->type(),
-            'sortable' => $this->sortableData(),
-        ];
+        return $this->extra +
+            [
+                'name' => $this->name,
+                'label' => $this->label,
+                'type' => $this->type(),
+            ];
     }
 
     /**

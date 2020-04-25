@@ -5,6 +5,7 @@ namespace Adizbek\Larabek\Core\Entity;
 
 
 use Adizbek\Larabek\Core\Field;
+use Adizbek\Larabek\Core\SortableField;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -13,7 +14,7 @@ trait EntitySheet
 {
     public function getListQuery(): Builder
     {
-        return $this->getModel()::query();
+        return $this->getModel()::query()->with($this->with);
     }
 
     public function getSheetFields(): Collection
@@ -71,14 +72,15 @@ trait EntitySheet
 
         if ($appliedSorts)
             $fields->each(function (Field $field) use ($appliedSorts) {
-                $sort = @$appliedSorts->{$field->getName()};
+                if ($field instanceof SortableField) {
+                    $sort = @$appliedSorts->{$field->getName()};
 
-
-                // if sorted use value otherwise use default direction
-                if (isset($sort)) {
-                    $field->setSortDirection($sort);
-                } else {
-                    $field->setDefaultDirectionActive();
+                    // if sorted use value otherwise use default direction
+                    if (isset($sort)) {
+                        $field->setSortDirection($sort);
+                    } else {
+                        $field->setDefaultDirectionActive();
+                    }
                 }
             });
 
@@ -92,13 +94,13 @@ trait EntitySheet
     protected function applySorts(Collection $fields, Builder $query)
     {
         // TODO how to apply two orders ?
-        $fields->each(function (Field $field) use ($query) {
-            $dir = $field->getSortDirection();
-
-            if ($dir) {
-                $query->orderBy($field->getName(), $dir);
-            }
-        });
+        $fields
+            ->filter(function (Field $field) {
+                return $field instanceof SortableField;
+            })
+            ->each(function (SortableField $field) use ($query) {
+                $field->applySort($this, $field->getSortDirection(), $query);
+            });
 
         return $query;
     }

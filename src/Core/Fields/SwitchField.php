@@ -14,7 +14,7 @@ class SwitchField extends Field
         return 'switch';
     }
 
-    public function transform(Model $model)
+    public function transform(Model $model, bool $form)
     {
         return [
             'checked' => boolval($model[$this->name])

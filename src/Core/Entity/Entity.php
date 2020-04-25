@@ -16,6 +16,8 @@ abstract class Entity
     private $request;
     protected $pagination = null;
 
+    protected $with = [];
+
     /**
      * Entity constructor.
      * @param Request $request

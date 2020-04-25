@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input v-model="localValue.text" class="form-control">
+    <b-form-select v-model="localValue.id" :options="field.items" text-field="text" value-field="id"></b-form-select>
   </div>
 </template>
 
@@ -8,15 +8,12 @@
 import FieldMixin from "../../mixins/FieldMixin";
 
 export default {
-  name: "TextFormField",
+  name: "BelongsToFormField",
 
   mixins: [FieldMixin],
 
-  watch: {
-    localValue(val) {
-      this.$emit('input', val);
-    }
-  }
+
+
 }
 </script>
 

@@ -46,5 +46,16 @@ class LarabekManager
         return $this->entities[$name];
     }
 
+    public function getEntityByClass($class)
+    {
+        foreach ($this->entities as $entity) {
+            if(get_class($entity) === $class) {
+                return $entity;
+            }
+        }
+
+        return null;
+    }
+
 
 }

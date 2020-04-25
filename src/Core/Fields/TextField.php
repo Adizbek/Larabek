@@ -4,18 +4,17 @@
 namespace Adizbek\Larabek\Core\Fields;
 
 
-use Adizbek\Larabek\Core\Field;
+use Adizbek\Larabek\Core\SortableField;
 use Illuminate\Database\Eloquent\Model;
 
-class TextField extends Field
+class TextField extends SortableField
 {
-
     public function type(): string
     {
         return 'text';
     }
 
-    public function transform(Model $model)
+    public function transform(Model $model, bool $form)
     {
         return [
             'text' => $model[$this->name]

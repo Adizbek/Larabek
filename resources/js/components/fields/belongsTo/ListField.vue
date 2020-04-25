@@ -1,14 +1,20 @@
 <template>
-  <div>{{data.text}}</div>
+  <router-link :to="url" class="btn btn-link p-0">{{data.text}}</router-link>
 </template>
 
 <script>
 export default {
-  name: "TextListField",
+  name: "BelongsToListField",
 
   props: {
     data: {},
     field: {}
+  },
+
+  computed: {
+    url() {
+      return Larabek.navigation.resolveDetails(this.field.entity, this.data.id).location
+    }
   }
 }
 </script>

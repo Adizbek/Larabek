@@ -2,7 +2,8 @@ import {LarabekEvents} from "../../core/consts";
 
 export default {
     props: {
-        value: {}
+        value: {},
+        field: {}
     },
 
     data() {
@@ -23,6 +24,12 @@ export default {
     methods: {
         onFormReset() {
             this.localValue = Object.assign({}, this.initValue);
+        }
+    },
+
+    watch: {
+        localValue(val) {
+            this.$emit('input', val);
         }
     }
 }
