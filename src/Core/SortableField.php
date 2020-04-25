@@ -20,6 +20,8 @@ trait FieldSortable
         $this->sortable = true;
         $this->sortDefaultDir = $defaultDir;
 
+        $this->extra['sortable'] = $this->sortableData();
+
         return $this;
     }
 
@@ -51,5 +53,19 @@ trait FieldSortable
     public function getSortDirection()
     {
         return $this->sortDirection;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSortable(): bool
+    {
+        return $this->sortable;
+    }
+
+    public function applySort($entity, $dir, $query)
+    {
+        if ($dir != null)
+            $query->orderBy($this->getName(), $dir);
     }
 }
